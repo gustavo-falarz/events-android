@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Events</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="error_title">Oops</string>
+    <string name="title_success">Success</string>
+    <string name="label_place">Local</string>
+    <string name="label_event_date">Data</string>
+    <string name="label_event_time">Horário</string>
+    <string name="disclaimer_limits">* Deixe em branco para não estabelecer limites.</string>
+    <string name="button_create_event">Criar evento</string>
+    <string name="time_separator">:</string>
+    <string name="date_separator">/</string>
+    <string name="list_dialog_negative">Cancel</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="select_pitch">Selecione a quadra</string>
+    <string name="location_icon_descriptor">Location icon</string>
+    <string name="date_icon_descriptor">Date icon</string>
+    <string name="time_icon_descriptor">Time icon</string>
+    <string name="title_setup">Configuração</string>
+    <string name="hint_max_attendees">Máximo de participantes</string>
+    <string name="label_attend">Attend</string>
+    <string name="label_leave_event">Leave event</string>
+    <string name="label_attend_event">Attend event</string>
+    <string name="title_people_attending">People attending</string>
+</resources>
