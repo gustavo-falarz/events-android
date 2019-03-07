@@ -27,4 +27,15 @@
     <string name="label_leave_event">Leave event</string>
     <string name="label_attend_event">Attend event</string>
     <string name="title_people_attending">People attending</string>
+
+    <string name="warning_empty_fields">Preencha todos campos</string>
+    <string name="warning_password_too_short">Senha muito curta</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Senha</string>
+    <string name="label_sign_up">Cadastrar</string>
+    <string name="hint_name">Nome</string>
+    <string name="label_login">Login</string>
+    <string name="error_pending_activation">Sua conta ainda não foi ativada, verifique sua caixa de email</string>
+
+
 </resources>

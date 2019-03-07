@@ -2,10 +2,12 @@ package com.pinecone.events.ui.splash
 
 interface Contract {
 
-    interface View{
-
+    interface View {
+        fun checkStart()
+        fun showSignInScreen()
     }
-    interface Presenter{
 
+    interface Presenter {
+        fun checkStart()
     }
 }

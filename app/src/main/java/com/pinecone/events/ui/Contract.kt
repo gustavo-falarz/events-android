@@ -1,4 +1,4 @@
-package com.pinecone.events.ui.login
+package com.pinecone.events.ui
 
 interface Contract {
 

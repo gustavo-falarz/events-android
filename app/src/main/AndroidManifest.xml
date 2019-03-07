@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.events.EventsView"
+            android:name=".ui.splash.SplashView"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,7 +31,15 @@
         <activity
             android:name=".ui.eventDetails.EventDetailsView"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signUp.SignUpView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signin.SignInView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.events.EventsView"
+            android:screenOrientation="portrait" />
     </application>
-
 
 </manifest>
