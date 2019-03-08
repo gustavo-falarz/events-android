@@ -1,21 +1,21 @@
 package com.pinecone.events.ui.signin
 
 import android.os.Bundle
-import com.google.firebase.auth.FirebaseAuth
 import com.pinecone.events.R
 import com.pinecone.events.ui.BaseView
 import com.pinecone.events.ui.events.EventsView
 import com.pinecone.events.ui.signUp.SignUpView
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_sign_in.*
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
-import java.lang.Exception
 
 class SignInView : BaseView(), Contract.View {
-    val presenter = SignInPresenter(FirebaseAuth.getInstance(), this)
+    val presenter = SignInPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_sign_in)
         btSignUp.setOnClickListener { onClickSignUp() }
         btSignIn.setOnClickListener { onClickSignIn() }
     }
@@ -38,6 +38,6 @@ class SignInView : BaseView(), Contract.View {
     }
 
     override fun onUserSignedIn() {
-        startActivity<EventsView>()
+        startActivity(intentFor<EventsView>().clearTask())
     }
 }

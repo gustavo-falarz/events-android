@@ -1,3 +1,3 @@
 package com.pinecone.events.model
 
-class Attendee(firebaseId: String, name: String, email: String) : User(firebaseId, name, email)
+class Attendee(id: String, name: String, email: String) : User(id, name, email)

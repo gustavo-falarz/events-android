@@ -6,7 +6,7 @@ import com.pinecone.events.model.Attendee
 import com.pinecone.events.service.UserService
 import java.lang.Exception
 
-class SignUpPresenter(private var auth: FirebaseAuth, var view: SignUpView) : Contract.Presenter {
+class SignUpPresenter(var view: SignUpView) : Contract.Presenter {
 
     override fun signUp(name: String, email: String, password: String) {
         if (isAnyFieldEmpty(name = name, password = password, email = email)) {
@@ -19,13 +19,14 @@ class SignUpPresenter(private var auth: FirebaseAuth, var view: SignUpView) : Co
             return
         }
 
+        val auth = FirebaseAuth.getInstance()
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(view) {
                     if (it.isSuccessful) {
                         auth.currentUser?.sendEmailVerification()
                                 ?.addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        saveToBackEnd(Attendee(firebaseId = auth.currentUser!!.uid,
+                                        saveToBackEnd(Attendee(id = auth.currentUser!!.uid,
                                                 name = name, email = email))
                                     }
                                 }
@@ -40,11 +41,14 @@ class SignUpPresenter(private var auth: FirebaseAuth, var view: SignUpView) : Co
     }
 
     override fun checkPassword(password: String): Boolean {
-        return password.length > 5
+        return password.length < 5
     }
 
     override fun saveToBackEnd(attendee: Attendee) {
-        view.onUserCreated(UserService.addAttendee(attendee))
+        view.onCreateUser(UserService.addAttendee(attendee))
     }
 
+    override fun onUserCreated() {
+        view.onUserCreated()
+    }
 }

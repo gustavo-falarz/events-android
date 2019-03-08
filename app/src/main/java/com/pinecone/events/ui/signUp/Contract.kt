@@ -6,11 +6,12 @@ import io.reactivex.Completable
 interface Contract {
 
     interface View {
-        fun onUserCreated(completable: Completable)
+        fun onUserCreated()
 
         fun onErrorSigningUp(exception: Exception)
 
         fun onClickSignUp()
+        fun onCreateUser(completable: Completable)
     }
 
     interface Presenter {
@@ -21,5 +22,6 @@ interface Contract {
         fun checkPassword(password: String): Boolean
 
         fun saveToBackEnd(attendee: Attendee)
+        fun onUserCreated()
     }
 }

@@ -4,7 +4,8 @@ import android.os.Bundle
 import com.pinecone.events.R
 import com.pinecone.events.ui.BaseView
 import com.pinecone.events.ui.signin.SignInView
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.intentFor
 
 class SplashView : BaseView(), Contract.View {
     var presenter = SplashPresenter(this)
@@ -20,6 +21,6 @@ class SplashView : BaseView(), Contract.View {
     }
 
     override fun showSignInScreen() {
-        startActivity<SignInView>()
+        startActivity(intentFor<SignInView>().clearTask())
     }
 }

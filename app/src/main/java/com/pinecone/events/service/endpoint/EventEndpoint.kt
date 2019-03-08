@@ -14,7 +14,7 @@ interface EventEndpoint {
     @PUT("event")
     fun addEvent(@Query("userId") userId: String,
                  @Query("placeId") placeId: String,
-                 @Body dateTime: Date): Completable
+                 @Query("dateTime") dateTime: Long): Completable
 
     @GET("event")
     fun getEvents(): Observable<List<Event>>

@@ -10,7 +10,7 @@ object EventService : Service() {
 
     fun addEvent(userId: String,
                  placeId: String,
-                 dateTime: Date) = service.addEvent(userId, placeId, dateTime)
+                 dateTime: Long) = service.addEvent(userId, placeId, dateTime)
 
     fun getEvents() = service.getEvents()
 

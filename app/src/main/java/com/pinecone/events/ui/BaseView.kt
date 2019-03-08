@@ -16,6 +16,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.yesButton
+import retrofit2.HttpException
+import com.pinecone.events.util.ExceptionHandler.parse
 
 /**
  * Created by Gustavo on 12/4/2017.
@@ -55,11 +57,14 @@ open class BaseView : AppCompatActivity() {
 
     fun handleException(exception: Throwable) {
         closeProgress()
-        exception.printStackTrace()
-        exception.message?.let {
-            alert(it, getString(R.string.error_title))
-            { yesButton { /*if (getActivity() !is MainActivity )finish()*/ } }.show()
+        val message: String = when (exception) {
+            is HttpException -> exception.parse().message
+            else -> exception.message!!
         }
+
+        alert(message, getString(R.string.error_title))
+        { yesButton { /*if (getActivity() !is MainActivity )finish()*/ } }.show()
+
     }
 
     fun showWarning(message: Int) {
