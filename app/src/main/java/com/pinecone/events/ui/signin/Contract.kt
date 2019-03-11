@@ -17,5 +17,6 @@ interface Contract {
         fun signInWithGoogle()
         fun signUp()
         fun checkActivation()
+        fun getToken()
     }
 }

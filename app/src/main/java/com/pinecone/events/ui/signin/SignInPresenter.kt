@@ -2,6 +2,7 @@ package com.pinecone.events.ui.signin
 
 import com.google.firebase.auth.FirebaseAuth
 import com.pinecone.events.R
+import com.pinecone.events.prefs
 
 class SignInPresenter(var view: SignInView) : Contract.Presenter {
 
@@ -30,9 +31,20 @@ class SignInPresenter(var view: SignInView) : Contract.Presenter {
 
     override fun checkActivation() {
         if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified) {
-            view.onUserSignedIn()
+            getToken()
         } else {
             view.onErrorSigningIn(Exception(view.getString(R.string.error_pending_activation)))
         }
+    }
+
+    override fun getToken() {
+        FirebaseAuth.getInstance().currentUser!!.getIdToken(true)
+                .addOnSuccessListener {
+                    prefs.token = it.token!!
+                    view.onUserSignedIn()
+                }
+                .addOnFailureListener {
+                    view.onErrorSigningIn(it)
+                }
     }
 }

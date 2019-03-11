@@ -13,4 +13,9 @@ class EventsApplication : Application() {
         lateinit var prefs: UserInfo
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        prefs = UserInfo(applicationContext)
+    }
+
 }

@@ -25,8 +25,11 @@ class SignInView : BaseView(), Contract.View {
     }
 
     override fun onClickSignIn() {
-        presenter.signInWithEmail(email = etEmail.text.toString(),
-                password = etPassword.text.toString())
+        showProgress()
+        presenter.signInWithEmail(
+                email = etEmail.text.toString(),
+                password = etPassword.text.toString()
+        )
     }
 
     override fun onErrorSigningIn(exception: Exception) {
@@ -38,6 +41,7 @@ class SignInView : BaseView(), Contract.View {
     }
 
     override fun onUserSignedIn() {
+        closeProgress()
         startActivity(intentFor<EventsView>().clearTask())
     }
 }
