@@ -2,7 +2,7 @@ package com.pinecone.events.ui.signin
 
 import com.google.firebase.auth.FirebaseAuth
 import com.pinecone.events.R
-import com.pinecone.events.prefs
+import com.pinecone.events.userInfo
 
 class SignInPresenter(var view: SignInView) : Contract.Presenter {
 
@@ -40,7 +40,7 @@ class SignInPresenter(var view: SignInView) : Contract.Presenter {
     override fun getToken() {
         FirebaseAuth.getInstance().currentUser!!.getIdToken(true)
                 .addOnSuccessListener {
-                    prefs.token = it.token!!
+                    userInfo.token = it.token!!
                     view.onUserSignedIn()
                 }
                 .addOnFailureListener {

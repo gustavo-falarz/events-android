@@ -3,19 +3,19 @@ package com.pinecone.events
 import android.app.Application
 import com.pinecone.events.util.UserInfo
 
-val prefs: UserInfo by lazy {
-    EventsApplication.prefs
+val userInfo: UserInfo by lazy {
+    EventsApplication.userInfo
 }
 
 class EventsApplication : Application() {
 
     companion object {
-        lateinit var prefs: UserInfo
+        lateinit var userInfo: UserInfo
     }
 
     override fun onCreate() {
         super.onCreate()
-        prefs = UserInfo(applicationContext)
+        userInfo = UserInfo(applicationContext)
     }
 
 }

@@ -1,10 +1,9 @@
 package com.pinecone.events.service
 
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import com.pinecone.events.BuildConfig
-import com.pinecone.events.prefs
+import com.pinecone.events.userInfo
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -46,7 +45,7 @@ open class Service {
         get() = Interceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                    .header("Access-Token", prefs.token)
+                    .header("Access-Token", userInfo.token)
                     .method(original.method(), original.body())
                     .build()
 

@@ -21,6 +21,7 @@ interface Contract {
 
         fun onMissingInfo(message: String)
 
+        fun showPlaces(places: List<Place>)
     }
 
     interface Presenter {

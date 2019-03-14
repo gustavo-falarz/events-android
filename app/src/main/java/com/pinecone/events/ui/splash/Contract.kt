@@ -5,6 +5,7 @@ interface Contract {
     interface View {
         fun checkStart()
         fun showSignInScreen()
+        fun showMainScreen()
     }
 
     interface Presenter {

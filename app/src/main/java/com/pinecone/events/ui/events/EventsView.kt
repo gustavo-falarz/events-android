@@ -14,11 +14,15 @@ import com.pinecone.events.ui.events.Contract
 import com.pinecone.events.ui.events.EventAdapter
 import com.pinecone.events.ui.events.EventsPresenter
 import com.pinecone.events.ui.newEvent.NewEventView
+import com.pinecone.events.ui.splash.SplashView
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_events_view.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.clearTask
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 import org.jetbrains.anko.startActivity
 
 class EventsView : BaseView(), Contract.View, NavigationView.OnNavigationItemSelectedListener {
@@ -89,11 +93,18 @@ class EventsView : BaseView(), Contract.View, NavigationView.OnNavigationItemSel
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_add_event -> {
-                startActivity<NewEventView>()
-            }
+            R.id.nav_add_event -> startActivity<NewEventView>()
+            R.id.nav_sign_out -> presenter.logOut()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return false
+    }
+
+    override fun onClickLogin() {
+        presenter.logOut()
+    }
+
+    override fun onUserLoggedOut() {
+        startActivity(intentFor<SplashView>().clearTask().newTask())
     }
 }

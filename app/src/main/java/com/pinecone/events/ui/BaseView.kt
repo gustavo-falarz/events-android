@@ -9,15 +9,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.pinecone.events.R
+import com.pinecone.events.ui.signin.SignInView
+import com.pinecone.events.util.ExceptionHandler.parse
 import com.pinecone.events.widget.Progress
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.yesButton
+import org.jetbrains.anko.*
 import retrofit2.HttpException
-import com.pinecone.events.util.ExceptionHandler.parse
 
 /**
  * Created by Gustavo on 12/4/2017.
@@ -57,14 +57,14 @@ open class BaseView : AppCompatActivity() {
 
     fun handleException(exception: Throwable) {
         closeProgress()
-        val message: String = when (exception) {
-            is HttpException -> exception.parse().message
-            else -> exception.message!!
+        if (exception is HttpException && exception.code() == 401) {
+            alert(getString(R.string.error_auth), getString(R.string.error_title))
+            { yesButton { startActivity(intentFor<SignInView>().clearTask().newTask()) } }.show()
+        } else if (exception is HttpException) {
+            alert(exception.parse().message, getString(R.string.error_title)) { yesButton { } }.show()
+        } else {
+            exception.message?.let { it -> alert(it, getString(R.string.error_title)) { yesButton {} }.show() }
         }
-
-        alert(message, getString(R.string.error_title))
-        { yesButton { /*if (getActivity() !is MainActivity )finish()*/ } }.show()
-
     }
 
     fun showWarning(message: Int) {

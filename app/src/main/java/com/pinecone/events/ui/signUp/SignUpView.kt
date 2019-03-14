@@ -9,6 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
 class SignUpView : BaseView(), Contract.View {
     var presenter = SignUpPresenter(this)
@@ -20,7 +21,7 @@ class SignUpView : BaseView(), Contract.View {
     }
 
     override fun onUserCreated() {
-        startActivity(intentFor<SignInView>().clearTask())
+        startActivity(intentFor<SignInView>().clearTask().newTask())
     }
 
     override fun onCreateUser(completable: Completable) {

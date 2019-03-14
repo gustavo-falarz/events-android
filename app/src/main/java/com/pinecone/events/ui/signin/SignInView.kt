@@ -8,6 +8,7 @@ import com.pinecone.events.ui.signUp.SignUpView
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 import org.jetbrains.anko.startActivity
 
 class SignInView : BaseView(), Contract.View {
@@ -42,6 +43,6 @@ class SignInView : BaseView(), Contract.View {
 
     override fun onUserSignedIn() {
         closeProgress()
-        startActivity(intentFor<EventsView>().clearTask())
+        startActivity(intentFor<EventsView>().clearTask().newTask())
     }
 }

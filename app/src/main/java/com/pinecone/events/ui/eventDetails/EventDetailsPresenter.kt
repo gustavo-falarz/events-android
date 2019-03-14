@@ -2,7 +2,6 @@ package com.pinecone.events.ui.eventDetails
 
 import com.google.firebase.auth.FirebaseAuth
 import com.pinecone.events.model.Event
-import com.pinecone.events.prefs
 import com.pinecone.events.service.EventService
 import com.pinecone.events.ui.eventDetails.Contract.Presenter
 

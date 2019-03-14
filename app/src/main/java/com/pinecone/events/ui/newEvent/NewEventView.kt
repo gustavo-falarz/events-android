@@ -14,18 +14,19 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_new_event_view.*
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
 class NewEventView : BaseView(), Contract.View {
     private lateinit var dialog: ListDialog
     private val presenter = NewEventPresenter(this)
-    private lateinit var places: List<Place>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_event_view)
+        setupActionBar()
         tvTime.setOnClickListener { onClickTime() }
         tvDate.setOnClickListener { onClickDate() }
-        tvPlace.setOnClickListener { onClickPlace() }
+        tvPlace.setOnClickListener { onClickPlaces() }
         btAddEvent.setOnClickListener { onClickAddEvent() }
     }
 
@@ -33,16 +34,11 @@ class NewEventView : BaseView(), Contract.View {
         addEvent()
     }
 
-    override fun onStart() {
-        super.onStart()
-        getPlaces()
-    }
-
     override fun onPlacesLoaded(observable: Observable<List<Place>>) {
         showProgress()
         observable.applySchedulers().subscribeBy(
                 onNext = {
-                    places = it
+                    showPlaces(it)
                 },
                 onError = {
                     handleException(it)
@@ -75,14 +71,14 @@ class NewEventView : BaseView(), Contract.View {
     }
 
     override fun onEventAdded() {
-        startActivity(intentFor<EventsView>().clearTask())
+        startActivity(intentFor<EventsView>().clearTask().newTask())
     }
 
     override fun onMissingInfo(message: String) {
         showWarning(message)
     }
 
-    private fun onClickPlace() {
+    override fun showPlaces(places: List<Place>) {
         val adapter = PlaceAdapter(places) {
             dialog.dismiss()
             presenter.placeId = it.id
@@ -90,6 +86,10 @@ class NewEventView : BaseView(), Contract.View {
         }
         dialog = ListDialog.newInstance(this, adapter)
         dialog.show(supportFragmentManager, "listDialog")
+    }
+
+    private fun onClickPlaces() {
+        presenter.getPlaces()
     }
 
     private fun onClickDate() {

@@ -3,9 +3,11 @@ package com.pinecone.events.ui.splash
 import android.os.Bundle
 import com.pinecone.events.R
 import com.pinecone.events.ui.BaseView
+import com.pinecone.events.ui.events.EventsView
 import com.pinecone.events.ui.signin.SignInView
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
 class SplashView : BaseView(), Contract.View {
     var presenter = SplashPresenter(this)
@@ -20,7 +22,11 @@ class SplashView : BaseView(), Contract.View {
         presenter.checkStart()
     }
 
+    override fun showMainScreen() {
+        startActivity(intentFor<EventsView>().clearTask().newTask())
+    }
+
     override fun showSignInScreen() {
-        startActivity(intentFor<SignInView>().clearTask())
+        startActivity(intentFor<SignInView>().clearTask().newTask())
     }
 }

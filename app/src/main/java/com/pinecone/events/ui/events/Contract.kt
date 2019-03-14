@@ -16,11 +16,16 @@ interface Contract {
         fun showEvent(event: Event)
 
         fun createAdapter(events: List<Event>)
+
+        fun onClickLogin()
+
+        fun onUserLoggedOut()
     }
 
     interface Presenter {
         fun getEvents()
 
         fun showEvent(event: Event)
+        fun logOut()
     }
 }

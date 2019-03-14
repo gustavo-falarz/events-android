@@ -36,6 +36,7 @@
     <string name="hint_name">Nome</string>
     <string name="label_login">Login</string>
     <string name="error_pending_activation">Sua conta ainda não foi ativada, verifique sua caixa de email</string>
+    <string name="error_auth">Problemas de autenticação faça login novamente</string>
 
 
 </resources>
