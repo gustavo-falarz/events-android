@@ -3,8 +3,7 @@ package com.pinecone.events.ui.newEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.pinecone.events.service.EventService
 import com.pinecone.events.service.PlacesService
-import com.pinecone.events.util.DateUtil
-import com.pinecone.events.util.DateUtil.toDate
+import com.pinecone.events.util.DateUtil.createDate
 
 class NewEventPresenter(val view: Contract.View) : Contract.Presenter {
     override var date: String? = null
@@ -17,9 +16,9 @@ class NewEventPresenter(val view: Contract.View) : Contract.Presenter {
     override fun addEvent() {
         when (checkErrors(placeId, date, time)) {
             true -> {
-                val dateTime = "$date $time".toDate(DateUtil.Pattern.EVENT_DEFAULT)
+                val dateTime = createDate("$date $time")
                 view.onAddEvent(EventService.addEvent(FirebaseAuth.getInstance().currentUser!!.uid,
-                        placeId!!, dateTime.time))
+                        placeId!!, dateTime.millis))
             }
         }
     }

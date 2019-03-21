@@ -10,5 +10,6 @@ interface Contract {
 
     interface Presenter {
         fun checkStart()
+        fun getToken()
     }
 }

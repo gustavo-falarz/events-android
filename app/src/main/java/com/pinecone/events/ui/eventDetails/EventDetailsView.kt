@@ -102,5 +102,4 @@ class EventDetailsView : BaseView(), View {
         adapter = AttendeeAdapter(attendees)
         rvAttendees.adapter = adapter
     }
-
 }

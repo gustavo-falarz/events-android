@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -45,7 +46,8 @@ open class Service {
         get() = Interceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                    .header("Access-Token", userInfo.token)
+                    .addHeader("Access-Token", userInfo.token)
+                    .addHeader("Accept-Language", Locale.getDefault().language)
                     .method(original.method(), original.body())
                     .build()
 

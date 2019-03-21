@@ -1,20 +1,26 @@
 package com.pinecone.events.util
 
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 import java.util.*
 
 object DateUtil {
 
-    fun String.toDate(pattern: Pattern = Pattern.DEFAULT): Date = this.toDateTime(pattern)
-
-    private fun String.toDateTime(pattern: Pattern = Pattern.DEFAULT): Date {
-        return getFormatter(pattern).parseDateTime(this).toDate()
+    fun String.toDateTime(pattern: Pattern = Pattern.DEFAULT): DateTime {
+        return getFormatter(pattern).parseDateTime(this)
     }
 
     fun Date.formatToString(pattern: Pattern = Pattern.DEFAULT): String {
         val dateTime = DateTime(this)
         return getFormatter(pattern).print(dateTime)
+    }
+
+    fun createDate(dateStr: String, pattern: Pattern = Pattern.EVENT_DEFAULT): DateTime {
+        val initialDate = dateStr.toDateTime(pattern)
+        val utc = initialDate.withZone(DateTimeZone.UTC)
+        val local = utc.toLocalDateTime()
+        return local.toDateTime()
     }
 
     enum class Pattern(val pattern: String) {
