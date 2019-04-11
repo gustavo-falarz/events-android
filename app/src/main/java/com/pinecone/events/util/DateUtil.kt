@@ -33,5 +33,4 @@ object DateUtil {
 
     private fun getFormatter(pattern: Pattern = Pattern.DEFAULT) = DateTimeFormat.forPattern(pattern.pattern)
 
-
 }

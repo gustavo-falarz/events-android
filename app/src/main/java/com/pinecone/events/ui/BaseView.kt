@@ -10,7 +10,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.pinecone.events.R
 import com.pinecone.events.ui.signin.SignInView
-import com.pinecone.events.util.ExceptionHandler.parse
+import com.pinecone.events.util.ExceptionHandler.Companion.parse
 import com.pinecone.events.widget.Progress
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -27,9 +27,7 @@ import retrofit2.HttpException
 @SuppressLint("Registered")
 open class BaseView : AppCompatActivity() {
 
-    private val tag = "BaseView"
     private var progress: Progress? = null
-
 
     fun <T> Observable<T>.applySchedulers(): Observable<T> {
         return subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())

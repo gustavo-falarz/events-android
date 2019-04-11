@@ -10,9 +10,9 @@ import com.pinecone.events.model.Event
 import com.pinecone.events.ui.BaseView
 import com.pinecone.events.ui.eventDetails.Contract.View
 import com.pinecone.events.util.DateUtil
-import com.pinecone.events.util.DateUtil.formatToString
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
+import com.pinecone.events.util.DateUtil.formatToString
 import kotlinx.android.synthetic.main.activity_event_details_view.*
 
 class EventDetailsView : BaseView(), View {

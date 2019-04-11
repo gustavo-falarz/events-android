@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.pinecone.events.R
 import com.pinecone.events.model.Event
-import com.pinecone.events.util.DateUtil.Pattern.EVENT_DATE
-import com.pinecone.events.util.DateUtil.Pattern.EVENT_TIME
-import com.pinecone.events.util.DateUtil.formatToString
+import com.pinecone.events.util.DateUtil
 import kotlinx.android.synthetic.main.adapter_events.view.*
+import com.pinecone.events.util.DateUtil.formatToString
 
 class EventAdapter(private val items: List<Event>, private val listener: (Event) -> Unit) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,8 +26,8 @@ class EventAdapter(private val items: List<Event>, private val listener: (Event)
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(event: Event, listener: (Event) -> Unit) = with(itemView) {
             tvPlace.text = event.place.name
-            tvDate.text = event.start.formatToString(EVENT_DATE)
-            tvTime.text = event.start.formatToString(EVENT_TIME)
+            tvDate.text = event.start.formatToString(DateUtil.Pattern.EVENT_DATE)
+            tvTime.text = event.start.formatToString(DateUtil.Pattern.EVENT_TIME)
             setOnClickListener { listener(event) }
         }
     }
